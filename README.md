@@ -40,7 +40,7 @@ conda config --remove channels conda-forge
 conda create --name vid2e python=3.9
 conda activate vid2e
 pip install -r requirements.txt
-conda install pybind11 matplotlib
+conda install pybind11 #此处不要安装matplotlib
 <!-- 注意要指定一下pytorch的版本 -->
 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.3 -c pytorch
 
@@ -71,13 +71,12 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtiff.so.5
 ~~~
 python esim_torch/test/test.py
 采用ipynb,选择kernel为vide的
-同时服务器终端安装一下
-pip install ipykernel 
+在服务器终端安装一下pip install ipykernel 会更快
 ~~~
-* 关于错误“cannot import name 'mplDeprecation' from 'matplotlib._api.deprecation”解决方案见下
+* 关于错误“cannot import name 'mplDeprecation' from 'matplotlib._api.deprecation”。应该是在requirements就已经指定了pip install matplotlib==3.5.1，但是作者在conda install -y -c conda-forge pybind11 matplotlib又安装了一次。解决方案见下
 ~~~
 pip install -r requirements.txt --force-reinstall
-#然后重启ipynb的kernel
+#然后重启ipynb的kernel，在终端安装更快：pip install ipykernel 
 ~~~
 
 * 采用Adaptive Upsampling来上采样video。输入的数据目录为example/original，输出数据目录为example/upsampled
