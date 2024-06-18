@@ -18,7 +18,7 @@ if __name__ == "__main__":
     print("Loading images")
     timestamps_s = np.genfromtxt("../esim_py/tests/data/images/timestamps.txt")
     images = increasing_sin_wave(timestamps_s)
-    timestamps_ns = (timestamps_s * 1e9).astype("int64")
+    timestamps_ns = (timestamps_s * 1e9).astype("int64") #将时间戳转换为ns
     log_images = np.log(images.astype("float32") / 255 + 1e-4)
 
     # generate torch tensors
@@ -35,8 +35,8 @@ if __name__ == "__main__":
     image = images[0]
 
     print("Plotting")
-    event_timestamps = events['t']
-    event_polarities = events['p']
+    event_timestamps = events['t'] #所有事件的时间戳
+    event_polarities = events['p'] #所有事件的极性
     i0 = log_images[0].cpu().numpy().ravel()
 
     fig, ax = plt.subplots(ncols=2)

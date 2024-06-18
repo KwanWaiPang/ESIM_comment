@@ -1,7 +1,7 @@
 import torch
 import esim_cuda
 
-
+# 下面这个类import的时候会name为ESIM
 class EventSimulator_torch(torch.nn.Module):
     def __init__(self, contrast_threshold_neg=0.2, contrast_threshold_pos=0.2, refractory_period_ns=0):
         self.contrast_threshold_neg = contrast_threshold_neg
@@ -22,15 +22,17 @@ class EventSimulator_torch(torch.nn.Module):
         self.last_image = None
         self.last_time = None
 
+    # 这个函数的作用是将输入的图像和时间戳转换为events
     def forward(self,
                 images, 
                 timestamps):
 
         if len(images.shape) == 2:
-            images = images.unsqueeze(0)
+            images = images.unsqueeze(0) #增加一个维度
         if len(timestamps.shape) == 0:
             timestamps = timestamps.unsqueeze(0)
 
+        # 检查输入的images和timestamps的数据类型
         self._check_inputs(images, timestamps)
 
         if self.initial_reference_values is None:
@@ -45,12 +47,13 @@ class EventSimulator_torch(torch.nn.Module):
             self.last_image = images[-1:]
             self.last_time = timestamps[-1:]
             return None
-
+        
+        # 这个才是初始化去处理的
         events = self.initialized_forward(images, timestamps)
 
         self.last_image = images[-1:]
         self.last_time = timestamps[-1:]
-
+        # 把结果返回
         return events
 
     def initialized_forward(self, images, timestamps):
@@ -62,6 +65,7 @@ class EventSimulator_torch(torch.nn.Module):
 
         event_counts = torch.zeros_like(images[0]).long()
 
+        # 运行的是esim_forward_count_events
         reference_values_over_time, event_counts = esim_cuda.forward_count_events(images, 
                                                                                   self.initial_reference_values,
                                                                                   reference_values_over_time,
@@ -77,6 +81,7 @@ class EventSimulator_torch(torch.nn.Module):
         # compute events on the GPU
         events = torch.zeros((total_num_events, 4), device=cumsum.device, dtype=cumsum.dtype)
 
+        # 注意此处就是调用cu文件的esim_forward
         events = esim_cuda.forward(images,
                                    timestamps,
                                    self.initial_reference_values,
@@ -92,10 +97,10 @@ class EventSimulator_torch(torch.nn.Module):
         # sort by timestamps. Do this for each batch of events
         if len(events) == 0:
             return None
-
+        # 按照时间戳排序
         events = events[events[:,2].argsort()]
         events = events[events[:,2]>0]
 
         self.initial_reference_values = reference_values_over_time[-1]
-
+        # 返回一个字典，包含x,y,t,p
         return dict(zip(['x','y','t','p'], events.T))

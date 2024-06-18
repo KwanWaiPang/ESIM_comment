@@ -89,7 +89,7 @@ __global__ void esim_cuda_forward_kernel(
     scalar_t i0 = imgs[linIdx+(t)*H*W]; // shifts forward one timestamp 
     scalar_t i1 = imgs[linIdx+(t+1)*H*W]; // shifts forward one timestamp 
 
-    int64_t t0 = ts[t];
+    int64_t t0 = ts[t];//输入的时间戳
     int64_t t1 = ts[t+1];
     
     if (t > 0) {
@@ -107,7 +107,7 @@ __global__ void esim_cuda_forward_kernel(
       int64_t timestamp = t0 + (t1-t0)*r;
       int64_t delta_t = timestamp - t_prev;
 
-
+    // t_ref就是refractory_period_ns，应该是要大于这个时间才响应
       if (delta_t > t_ref || t_prev == 0) {
           int64_t idx = 4 * (offset + evIdx);
           ev[idx + 0] = x;
