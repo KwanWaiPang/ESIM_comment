@@ -15,3 +15,6 @@ dataset/
 rosbag_dataset/
 *.ckpt
 .idea/
+
+esim_py/tests/data/upsampled/*
+esim_py/tests/data/images/imgs/*
