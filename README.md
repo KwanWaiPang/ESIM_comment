@@ -17,7 +17,7 @@
 <br>
 
 # 配置记录
-* 下载[FILM](https://github.com/google-research/frame-interpolation)
+* 下载[FILM](https://github.com/google-research/frame-interpolation)，用于视频、图像插值的（upsampled）
 ~~~
 <!-- 下载到当前目录 -->
 wget https://rpg.ifi.uzh.ch/data/VID2E/pretrained_models.zip
