@@ -87,12 +87,32 @@ python upsampling/upsample.py --input_dir=example/original --output_dir=example/
 ~~~
 
 ## 测试记录
-* first test [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/esim_torch/test/test.ipynb)
-* 画不同的event represent [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/esim_torch/test/evaluating_event_representation.ipynb)
-* 测试upsampling+ESIM [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/upsample_esim.ipynb)
-* [画图各种representation](https://github.com/LarryDong/event_representation); [TUB开源的一些event_utils](https://github.com/tub-rip/event_utils); [TUB开源的events_viz](https://github.com/tub-rip/events_viz)
-
+* first test [link](esim_torch/test/test.ipynb)
+* 画不同的event represent [link](esim_torch/test/evaluating_event_representation.ipynb)
+* 测试upsampling+ESIM [link](upsample_esim.ipynb)
 
 # 用HKU-dataset生成数据集同时与real event data 进行对比
+* 读入rosbag并可视化image及其对应的event [link](rosbag_reading/read_rosbag.ipynb)
+* 需要安装rosbag相关的依赖~
+~~~
+pip install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag
+
+pip install rosbag_pandas
+
+pip install cv_bridge
+
+pip install sensor_msgs --extra-index-url https://rospypi.github.io/simple/
+
+pip install geometry_msgs --extra-index-url https://rospypi.github.io/simple
+~~~
+
+
 
 # 用TartanAir生成event 数据集
+
+
+# 参考资料
+* [画图各种representation](https://github.com/LarryDong/event_representation); 
+* [TUB开源的一些event_utils](https://github.com/tub-rip/event_utils); 
+* [TUB开源的events_viz](https://github.com/tub-rip/events_viz);
+* [DEVO](https://github.com/KwanWaiPang/DEVO_comment);
