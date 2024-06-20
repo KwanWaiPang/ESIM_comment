@@ -86,4 +86,8 @@ device=cpu
 python upsampling/upsample.py --input_dir=example/original --output_dir=example/upsampled --device=$device
 ~~~
 
+* first test [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/esim_torch/test/test.ipynb)
+* 画不同的event represent [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/esim_torch/test/evaluating_event_representation.ipynb)
+* 测试upsampling+ESIM [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/upsample_esim.ipynb)
+
 * [画图各种representation](https://github.com/LarryDong/event_representation); [TUB开源的一些event_utils](https://github.com/tub-rip/event_utils); [TUB开源的events_viz](https://github.com/tub-rip/events_viz)
