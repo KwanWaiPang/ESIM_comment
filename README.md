@@ -54,7 +54,7 @@ pip install setuptools==69.5.1
 pip install esim_torch/
 ~~~
 
-## 以TartanAir为例
+## 测试是否安装成功以及debug
 * [esim_py的使用](https://github.com/uzh-rpg/rpg_vid2e/blob/master/esim_py/README.md)
 * [esim_torch的使用](https://github.com/uzh-rpg/rpg_vid2e/blob/master/esim_torch/README.md)
 * 先测试是否安装成功
@@ -86,8 +86,13 @@ device=cpu
 python upsampling/upsample.py --input_dir=example/original --output_dir=example/upsampled --device=$device
 ~~~
 
+## 测试记录
 * first test [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/esim_torch/test/test.ipynb)
 * 画不同的event represent [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/esim_torch/test/evaluating_event_representation.ipynb)
 * 测试upsampling+ESIM [link](https://github.com/KwanWaiPang/ESIM_comment/blob/main/upsample_esim.ipynb)
-
 * [画图各种representation](https://github.com/LarryDong/event_representation); [TUB开源的一些event_utils](https://github.com/tub-rip/event_utils); [TUB开源的events_viz](https://github.com/tub-rip/events_viz)
+
+
+# 用HKU-dataset生成数据集同时与real event data 进行对比
+
+# 用TartanAir生成event 数据集
