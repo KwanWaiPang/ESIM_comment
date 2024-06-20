@@ -10,6 +10,8 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 import cv2
 
+import rospy
+
 
 def read_first_evs_from_rosbag(bag, evtopic):
     for topic, msg, t in bag.read_messages(evtopic):
@@ -36,6 +38,20 @@ def read_evs_from_rosbag(bag, evtopic, H=180, W=240):
 
         # if len(evs) > 1000:
         #     break
+    return np.array(evs) # (N, 4)此处应该是所有的事件
+
+
+def read_evs_from_rosbag_intimestamp(bag, evtopic, timestamp_us_0, timestamp_us_1):
+    print(f"Start reading evs from {evtopic},事件的极性为1和-1")
+
+    evs = [] #初始化事件列表
+    progress_bar = tqdm.tqdm(total=bag.get_message_count(evtopic)) #进度条显示的是event streams的数量,但是返回的却是所有的事件
+    for topic, msg, t in bag.read_messages(topics=evtopic,start_time=rospy.Time.from_sec(timestamp_us_0/1e6), end_time=rospy.Time.from_sec(timestamp_us_1/1e6)): #遍历bag文件中的每一条消息
+        for ev in msg.events:
+            p = 1 if ev.polarity else -1 #注意极性为1和-1 
+            evs.append({'x':ev.x, 'y':ev.y, 't':ev.ts.to_nsec()/1e3, 'p':p}) 
+        progress_bar.update(1)
+
     return np.array(evs) # (N, 4)此处应该是所有的事件
 
 

@@ -105,6 +105,7 @@ pip install sensor_msgs --extra-index-url https://rospypi.github.io/simple/
 
 pip install geometry_msgs --extra-index-url https://rospypi.github.io/simple
 ~~~
+* 读入rosbag,然后将其中的10张图片生成event,同时与10张图片期间的真实的event进行可视化对比.[Link](rosbag_reading/generate_sim_event.ipynb)
 
 
 
